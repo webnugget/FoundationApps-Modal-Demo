@@ -15,7 +15,6 @@
     ])
         .config(config)
         .run(run)
-        .controller('StartController', StartController)
         .controller('ModalController', function($scope, close) {
 
             $scope.close = function(result) {
@@ -38,21 +37,8 @@
         $locationProvider.hashPrefix('!');
     }
 
-    function run() {
+    function run(store, ModalService) {
         FastClick.attach(document.body);
-    }
-
-
-
-    StartController.$inject = ['$scope', '$stateParams', '$state', '$controller', 'FoundationApi', 'store', 'ModalService'];
-
-    function StartController($scope, $stateParams, $state, $controller, fa, store, ModalService) {
-        angular.extend(this, $controller('DefaultController', {
-            $scope: $scope,
-            $stateParams: $stateParams,
-            $state: $state
-        }));
-
         if (!store.get('termsaccepted')) {
             var modalOptions = {
                 templateUrl: 'templates/modal.html',
@@ -71,5 +57,9 @@
 
         }
     }
+
+
+
+
 
 })();
